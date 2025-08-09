@@ -1,62 +1,61 @@
 # Site settings
-title: "TheIGuy Site"
-description: "Developer, Designer & Creator"
+title: "TheIGuy"
+title_separator: "|"
+subtitle: "Developer & Designer"
+description: "CSM, Tech Support Manager & Industrial Designer"
 url: "https://theiguy.ca"
 baseurl: ""
 
-# Use Minimal Mistakes theme
+# Theme
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
-# Site author
+# Site Author
 author:
-  name: "Guy E"
-  avatar: "/assets/images/bio-photo.jpg"
-  bio: "CSM, TechSupport Manager, Developer & Industrial Designer"
+  name: "TheIGuy"
+  avatar: "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio: "CSM, Tech Support Manager & Industrial Designer"
   location: "EMEA"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/oneguy1"
 
-# Navigation
-masthead_title: "TheIGuy"
-breadcrumbs: true
+# Site Footer
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/oneguy1"
 
-# Main navigation
-main:
-  - title: "Portfolio"
-    url: /portfolio/
-  - title: "Code Snippets"
-    url: /code-snippets/
-  - title: "Industrial Design"
-    url: /design/
-  - title: "My App"
-    url: /app/
-  - title: "About"
-    url: /about/
-# Collections for organizing content
-collections:
-  portfolio:
-    output: true
-    permalink: /:collection/:name/
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      share: true
-      related: true
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: single
-      author_profile: true
+# Reading Files
+include:
+  - .htaccess
+  - _pages
+exclude:
+  - "*.sublime-project"
+  - "*.sublime-workspace"
+  - vendor
+  - .asset-cache
+  - .bundle
+  - .jekyll-assets-cache
+  - .sass-cache
+  - assets/js/plugins
+  - assets/js/_main.js
+  - assets/js/vendor
+  - Capfile
+  - CHANGELOG
+  - config
+  - Gemfile
+  - Gruntfile.js
+  - gulpfile.js
+  - LICENSE
+  - log
+  - node_modules
+  - package.json
+  - Rakefile
+  - README
+  - tmp
 
 # Plugins
 plugins:
@@ -66,9 +65,15 @@ plugins:
   - jekyll-feed
   - jekyll-include-cache
 
-  # Site footer
-footer:
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/oneguy1"
+# Navigation
+main:
+  - title: "Portfolio"
+    url: /portfolio/
+  - title: "Code Snippets"  
+    url: /code-snippets/
+  - title: "Industrial Design"
+    url: /design/
+  - title: "My App"
+    url: /app/
+  - title: "About"
+    url: /about/
