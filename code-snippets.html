@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Snippets | The iGuy</title>
+    <style>
+    /* --- THEME VARIABLES --- */
+    :root {
+        --teal: #48C1CF;
+        --dark-grey: #1a1a1a;
+        --code-bg: #2d2d2d;
+        --light-text: #ffffff;
+        --sub-text: #b0b0b0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: linear-gradient(135deg, #0f0f0f 0%, #1c3d42 100%);
+        background-attachment: fixed;
+        color: var(--light-text);
+        line-height: 1.6;
+        padding: 40px 20px;
+    }
+
+    .container { max-width: 950px; margin: 0 auto; }
+    
+    nav { margin-bottom: 40px; }
+    .back-link { color: var(--teal); text-decoration: none; font-weight: 500; }
+    .back-link:hover { text-decoration: underline; }
+
+    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    header p { color: var(--sub-text); margin-bottom: 40px; }
+
+    /* --- SNIPPET CARDS --- */
+    .snippet-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(72, 193, 207, 0.2);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 40px;
+    }
+
+    .snippet-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .snippet-header h2 { color: var(--teal); font-size: 1.4rem; }
+
+    .download-btn {
+        background: var(--teal);
+        color: var(--dark-grey);
+        padding: 8px 15px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.85rem;
+        transition: 0.3s;
+    }
+    .download-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+    .description { color: var(--sub-text); margin-bottom: 15px; font-size: 0.95rem; }
+
+    /* --- CODE BLOCK STYLING --- */
+    pre {
+        background: var(--code-bg);
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        border: 1px solid rgba(0,0,0,0.3);
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.85rem;
+        color: #e0e0e0;
+        max-height: 500px;
+    }
+
+    code { display: block; white-space: pre; }
+
+    /* Syntax Highlighting Colors */
+    .keyword { color: #c678dd; } 
+    .string { color: #98c379; }  
+    .comment { color: #5c6370; font-style: italic; }
+    .function { color: #61afef; } 
+
+    footer { text-align: center; margin-top: 60px; color: #555; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <nav><a href="index.html" class="back-link">← Back to Home</a></nav>
+
+        <header>
+            <h1>Code Snippets</h1>
+            <p>A library of technical solutions, from GUI automation to database optimization.</p>
+        </header>
+
+        <div class="snippet-card">
+            <div class="snippet-header">
+                <h2>Python: Data Storage Calculator (GUI)</h2>
+                <a href="downloads/storage_calc.zip" class="download-btn">Download .ZIP</a>
+            </div>
+            <p class="description">A Tkinter-based desktop application that parses text for storage values (TB, GB, MB) and calculates the total with real-time unit conversion.</p>
+<pre><code><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk
+<span class="keyword">from</span> tkinter <span class="keyword">import</span> messagebox
+<span class="keyword">import</span> re
+
+<span class="comment"># Constants for binary conversion</span>
+CONVERSION_FACTOR = 1024.0
+
+<span class="keyword">def</span> <span class="function">calculate_and_display</span>():
+    input_text = text_input.get(<span class="string">"1.0"</span>, tk.END)
+    pattern = re.compile(<span class="string">r'(\d+\.?\d*)\s*(TB|GB|MB)'</span>, re.IGNORECASE)
+    matches = pattern.findall(input_text)
+    total_gb = 0.0
+
+    <span class="keyword">if not</span> matches:
+        messagebox.showerror(<span class="string">"Error"</span>, <span class="string">"No valid values found."</span>)
+        <span class="keyword">return</span>
+
+    <span class="keyword">for</span> value_str, unit <span class="keyword">in</span> matches:
+        value = float(value_str)
+        unit_upper = unit.upper()
+        <span class="keyword">if</span> unit_upper == <span class="string">'TB'</span>: total_gb += value * CONVERSION_FACTOR
+        <span class="keyword">elif</span> unit_upper == <span class="string">'GB'</span>: total_gb += value
+        <span class="keyword">elif</span> unit_upper == <span class="string">'MB'</span>: total_gb += value / CONVERSION_FACTOR
+
+    update_result_labels(total_gb)
+
+<span class="keyword">def</span> <span class="function">update_result_labels</span>(total_gb):
+    total_mb = total_gb * CONVERSION_FACTOR
+    total_tb = total_gb / CONVERSION_FACTOR
+    selected_unit = display_unit_var.get()
+
+    <span class="keyword">if</span> selected_unit == <span class="string">"MB"</span>: result = <span class="string">f"{total_mb:.2f} MB"</span>
+    <span class="keyword">elif</span> selected_unit == <span class="string">"TB"</span>: result = <span class="string">f"{total_tb:.4f} TB"</span>
+    <span class="keyword">else</span>: result = <span class="string">f"{total_gb:.2f} GB"</span>
+
+    result_label.config(text=<span class="string">f"Total Storage: {result}"</span>)
+
+<span class="comment"># --- GUI Setup ---</span>
+root = tk.Tk()
+root.title(<span class="string">"Data Storage Calculator"</span>)
+root.geometry(<span class="string">"500x450"</span>)
+
+text_input = tk.Text(root, height=10, width=60)
+text_input.pack(padx=10, pady=5)
+
+calculate_button = tk.Button(root, text=<span class="string">"Calculate"</span>, command=calculate_and_display, bg=<span class="string">"green"</span>, fg=<span class="string">"white"</span>)
+calculate_button.pack(pady=5)
+
+display_unit_var = tk.StringVar(value=<span class="string">"GB"</span>)
+<span class="comment"># ... (Radio buttons and labels)</span>
+
+root.mainloop()</code></pre>
+        </div>
+
+        <div class="snippet-card">
+            <div class="snippet-header">
+                <h2>SQL: Advanced Insert Logic</h2>
+                <a href="downloads/sql_trick.zip" class="download-btn">Download .ZIP</a>
+            </div>
+            <p class="description">A clever workaround for the "cannot select from target table" limitation in SQL. This uses an aliased subquery to allow inserting from a SELECT on the same table.</p>
+<pre><code><span class="keyword">INSERT INTO</span> user_in_group (user_id, group_id, role_id, notification_enabled, creation_time, is_deleted)
+<span class="keyword">SELECT DISTINCT</span> user_id, 4307, 3, 1, <span class="function">now()</span>, 0 
+<span class="keyword">FROM</span> user_in_group 
+<span class="keyword">WHERE</span> user_id <span class="keyword">NOT IN</span> (
+    <span class="keyword">SELECT</span> user_id <span class="keyword">FROM</span> (
+        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> user_in_group
+    ) a <span class="keyword">WHERE</span> group_id = 4307
+);</code></pre>
+        </div>
+
+        <div class="snippet-card">
+            <div class="snippet-header">
+                <h2>Bash: Keyword Log Searcher</h2>
+                <a href="downloads/log_search.zip" class="download-btn">Download .ZIP</a>
+            </div>
+            <p class="description">A practical shell script for DevOps and troubleshooting. It converts user input into a regex-friendly pattern to search multiple logs simultaneously.</p>
+<pre><code><span class="comment">#!/bin/bash</span>
+
+<span class="comment"># A little script to search entries in a log file based on keywords search.</span>
+
+<span class="keyword">read -p</span> <span class="string">"Enter the full path to the log file: "</span> log_file_path
+
+<span class="keyword">if</span> [ ! -f <span class="string">"$log_file_path"</span> ]; <span class="keyword">then</span>
+    <span class="keyword">echo</span> <span class="string">"Error: File not found."</span>
+    <span class="keyword">exit</span> 1
+<span class="keyword">fi</span>
+
+<span class="keyword">read -p</span> <span class="string">"Enter keywords (separated by a space): "</span> search_keywords
+
+<span class="keyword">grep_pattern</span>=$(<span class="keyword">echo</span> <span class="string">"$search_keywords"</span> | <span class="keyword">sed</span> <span class="string">'s/ /|/g'</span>)
+
+<span class="function">grep</span> -E --color=always -i <span class="string">"$grep_pattern"</span> <span class="string">"$log_file_path"</span></code></pre>
+        </div>
+
+        <footer>&copy; 2025 The iGuy</footer>
+    </div>
+
+</body>
+</html>

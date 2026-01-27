@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Modeling | The iGuy</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    
+    <style>
+        /* --- CSS VARIABLES (Consistent Branding) --- */
+        :root {
+            --teal: #48C1CF;
+            --dark-grey: #1a1a1a;
+            --modal-bg: #232323;
+            --light-text: #ffffff;
+            --sub-text: #b0b0b0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1c3d42 100%);
+            background-attachment: fixed;
+            color: var(--light-text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        nav { margin-bottom: 40px; }
+        .back-link {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        header p { color: var(--sub-text); margin-bottom: 50px; max-width: 700px; }
+
+        /* --- MAIN GRID STYLING --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer; /* Shows it's clickable */
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--teal);
+        }
+
+        .card-thumb {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #222;
+        }
+
+        .card-info { padding: 20px; }
+        .card-info h2 { font-size: 1.3rem; margin-bottom: 5px; color: var(--teal); }
+        .card-info p { font-size: 0.9rem; color: var(--sub-text); }
+
+
+        /* --- MODAL (POPUP) STYLING --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85); /* Dim background */
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--modal-bg);
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid var(--teal);
+            border-radius: 20px;
+            max-width: 900px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover { color: var(--teal); }
+
+        .modal-title { font-size: 1.8rem; color: var(--teal); margin-bottom: 20px; }
+
+        /* The 3D Viewer Container */
+        model-viewer {
+            width: 100%;
+            height: 500px;
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* The Mini-Gallery inside the modal */
+        .modal-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .modal-gallery-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .modal-gallery-img:hover { border-color: var(--teal); }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </nav>
+
+        <header>
+            <h1>3D Modeling Showcase</h1>
+            <p>Click on a project to view the interactive 3D model and render gallery.</p>
+        </header>
+
+        <main class="projects-grid">
+            
+            <div class="project-card" onclick="openModal('modal1')">
+                <img src="3dmodels/hex_tool1.png" alt="Project 1 Thumb" class="card-thumb">
+                <div class="card-info">
+                    <h2>Simple hex tool organizer</h2>
+                    <p>I created a simple compact honeycomb design to organize my hex tool drill bits.</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('modal2')">
+                <img src="3dmodels/mr2_1.jpg" alt="Project 2 Thumb" class="card-thumb">
+                <div class="card-info">
+                    <h2>MK1 MR2 Keychain</h2>
+                    <p>A simple AW11 keychain</p>
+                </div>
+            </div>
+            
+        </main>
+        
+        <footer>&copy; 2025 The iGuy</footer>
+    </div>
+
+
+    <div id="modal1" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h2 class="modal-title">Mechanical Assembly Viewer</h2>
+            
+            <model-viewer 
+                src="3dmodels/hex_tool.glb" 
+                alt="Compact Hex tool organizer" 
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1"
+                poster="https://via.placeholder.com/800x500/1a1a1a/48C1CF?text=Loading+3D+Model..."
+            ></model-viewer>
+
+            <h3>Image and render Gallery</h3>
+            <div class="modal-gallery-grid">
+                <img src="3dmodels/hex_tool1.png" class="modal-gallery-img">
+                <img src="3dmodels/hex_tool2.jpg" class="modal-gallery-img">
+                <img src="3dmodels/hex_tool3.jpg" class="modal-gallery-img">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h2 class="modal-title">Product Concept Viewer</h2>
+            
+            <model-viewer 
+                src="3dmodels/mk1mr2.glb" 
+                alt="A simple MR2 Keychain" 
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1"
+                poster="https://via.placeholder.com/800x500/1a1a1a/48C1CF?text=Loading+3D+Model..."
+            ></model-viewer>
+
+            <h3>Render Gallery</h3>
+            <div class="modal-gallery-grid">
+                <img src="3dmodels/mr2_1.jpg" class="modal-gallery-img">
+                <img src="3dmodels/mr2_2.jpg" class="modal-gallery-img">
+                <img src="3dmodels/mr2_3.jpg" class="modal-gallery-img">
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Function to open a specific modal by its ID
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            // Stop background scrolling when modal is open
+            document.body.style.overflow = "hidden";
+        }
+
+        // Function to close a specific modal by its ID
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            // Re-enable background scrolling
+            document.body.style.overflow = "auto";
+        }
+
+        // Close modal if clicking outside the content box (on the dark overlay)
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+
+</body>
+</html>

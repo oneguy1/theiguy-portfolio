@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobbies | The iGuy</title>
+    <style>
+    /* --- CSS VARIABLES --- */
+    :root {
+        --teal: #48C1CF;
+        --dark-grey: #1a1a1a;
+        --modal-bg: #1c1c1c;
+        --light-text: #ffffff;
+        --sub-text: #b0b0b0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: linear-gradient(135deg, #0f0f0f 0%, #1c3d42 100%);
+        background-attachment: fixed;
+        color: var(--light-text);
+        line-height: 1.6;
+        padding: 40px 20px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+    nav { margin-bottom: 40px; }
+    .back-link { color: var(--teal); text-decoration: none; font-weight: 500; }
+    
+    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    header p { color: var(--sub-text); }
+
+    /* --- MAIN PAGE GALLERY GRID --- */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+    }
+
+    .gallery-item {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.02); border-color: var(--teal); }
+    .gallery-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+    .gallery-caption { padding: 15px; }
+    .gallery-caption h3 { font-size: 1.1rem; color: var(--teal); }
+
+    /* --- MODAL BASE STYLING --- */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.95);
+        backdrop-filter: blur(10px);
+        overflow-y: auto;
+    }
+
+    .modal-content {
+        background-color: var(--modal-bg);
+        margin: 2% auto;
+        padding: 20px;
+        border-radius: 15px;
+        max-width: 1000px;
+        width: 95%;
+        position: relative;
+        border: 1px solid rgba(72, 193, 207, 0.2);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px; right: 20px;
+        color: white; font-size: 40px;
+        cursor: pointer;
+        z-index: 3000;
+    }
+
+    /* --- HERO CONTAINER & NAVIGATION --- */
+    .hero-container {
+        position: relative;
+        width: 100%;
+        background: #000;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+    }
+
+    .modal-hero-img {
+        max-width: 100%;
+        max-height: 70vh;
+        display: block;
+        object-fit: contain;
+    }
+
+    /* THE ARROWS - High Visibility */
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+        transition: 0.3s;
+        background-color: rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        text-decoration: none;
+        z-index: 2500;
+        user-select: none;
+    }
+    .next { right: 0; }
+    .prev { left: 0; }
+    .prev:hover, .next:hover { background-color: rgba(72, 193, 207, 0.4); color: var(--teal); }
+
+    /* THE COUNTER - 1/20 */
+    .slide-number {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: var(--teal);
+        border: 1px solid rgba(72, 193, 207, 0.3);
+        z-index: 2600;
+    }
+
+    .modal-text h2 { color: var(--teal); margin-bottom: 10px; }
+
+    /* THUMBNAIL GRID */
+    .modal-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .modal-gallery-img {
+        width: 100%;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: 0.3s;
+    }
+    .modal-gallery-img:hover, .modal-gallery-img.active { opacity: 1; border: 2px solid var(--teal); }
+
+    footer { text-align: center; margin-top: 60px; color: #444; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav><a href="index.html" class="back-link">← Back to Home</a></nav>
+        <header>
+            <h1>Hobbies</h1>
+            <p>From the depths of the Red Sea to the classic car tracks.</p>
+        </header>
+
+        <main class="gallery-grid">
+            <div class="gallery-item" onclick="openModal('project1')">
+                <img src="images/hobbies.jpg" class="gallery-img">
+                <div class="gallery-caption"><h3>Toyota MR2 Supercharged</h3></div>
+            </div>
+            <div class="gallery-item" onclick="openModal('project2')">
+                <img src="images/scuba/scuba1.jpg" class="gallery-img">
+                <div class="gallery-caption"><h3>Water above and below</h3></div>
+            </div>
+            <div class="gallery-item" onclick="openModal('project3')">
+                <img src="images/land/land1.jpg" class="gallery-img">
+                <div class="gallery-caption"><h3>Travel</h3></div>
+            </div>
+            <div class="gallery-item" onclick="openModal('project4')">
+                <img src="images/air/air1.jpg" class="gallery-img">
+                <div class="gallery-caption"><h3>The skies above</h3></div>
+            </div>
+            <div class="gallery-item" onclick="openModal('project5')">
+                <img src="images/art/art1.jpg" class="gallery-img">
+                <div class="gallery-caption"><h3>Visual arts</h3></div>
+            </div>
+            <div class="gallery-item" onclick="openModal('project6')">
+                <img src="images/cars/car1.jpg" class="gallery-img">
+                <div class="gallery-caption"><h3>Classic car exhibits</h3></div>
+            </div>
+        </main>
+        <footer>&copy; 2025 The iGuy</footer>
+    </div>
+
+    <div id="project1" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('project1')">&times;</span>
+            <div class="hero-container">
+                <div class="slide-number">1 / 5</div>
+                <a class="prev" onclick="moveImage('project1', -1)">&#10094;</a>
+                <img src="images/mr2/mr2-1.jpg" class="modal-hero-img">
+                <a class="next" onclick="moveImage('project1', 1)">&#10095;</a>
+            </div>
+            <div class="modal-text">
+                <h2>1989 Toyota MR2</h2>
+                 <p>In 1989 I got my first sports car, a 1989 Toyota MR2 Supercharged. Before I got it and after I drove many cars, but something about it is different even today. You can't get cars like these anymore... So I'm keeping it.</p>
+                <div class="modal-gallery-grid">
+                    <img src="images/mr2/mr2-1.jpg" class="modal-gallery-img" onclick="changeImage('project1', this)">
+                    <img src="images/mr2/mr2-2.jpg" class="modal-gallery-img" onclick="changeImage('project1', this)">
+                    <img src="images/mr2/mr2-3.jpg" class="modal-gallery-img" onclick="changeImage('project1', this)">
+                    <img src="images/mr2/mr2-4.jpg" class="modal-gallery-img" onclick="changeImage('project1', this)">
+                    <img src="images/mr2/mr2-5.jpg" class="modal-gallery-img" onclick="changeImage('project1', this)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project2" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('project2')">&times;</span>
+            <div class="hero-container">
+                <div class="slide-number">1 / 7</div>
+                <a class="prev" onclick="moveImage('project2', -1)">&#10094;</a>
+                <img src="images/scuba/scuba1.jpg" class="modal-hero-img">
+                <a class="next" onclick="moveImage('project2', 1)">&#10095;</a>
+            </div>
+            <div class="modal-text">
+                <h2>Water above and below</h2>
+                <p>Here are a few pictures of one of my loves, water. I have 3 scuba certifications, dove in many bodies of water from the pacific ocean to the red sea. Above water I have a boating license and enjoy the view from above too.</p>
+                <div class="modal-gallery-grid">
+                    <img src="images/scuba/scuba1.jpg" class="modal-gallery-img" onclick="changeImage('project2', this)">
+                    <img src="images/scuba/scuba2.jpg" class="modal-gallery-img" onclick="changeImage('project2', this)">
+                    <img src="images/scuba/scuba3.jpg" class="modal-gallery-img" onclick="changeImage('project2', this)">
+                    <img src="images/scuba/water1.jpg" class="modal-gallery-img" onclick="changeImage('project2', this)">
+                    <img src="images/scuba/scuba4.jpg" class="modal-gallery-img" onclick="changeImage('project2', this)">
+                    <img src="images/scuba/scuba5.jpg" class="modal-gallery-img" onclick="changeImage('project2', this)">
+                    <img src="images/scuba/water2.jpg" class="modal-gallery-img" onclick="changeImage('project2', this)">
+                </div>
+            </div>
+        </div>
+    </div>
+<div id="project3" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('project3')">&times;</span>
+            <div class="hero-container">
+                <div class="slide-number">1 / 8</div>
+                <a class="prev" onclick="moveImage('project3', -1)">&#10094;</a>
+                <img src="images/land/land1.jpg" class="modal-hero-img">
+                <a class="next" onclick="moveImage('project3', 1)">&#10095;</a>
+            </div>
+            <div class="modal-text">
+                <h2>Travel</h2>
+                <p>Having lived on 3 continents and speaking several languages, I always am interested in visiting new places, learning about new cultures and absorbing the scenery. Here is a small selection with a mix of nature and urban scenes</p>
+                <div class="modal-gallery-grid">
+                    <img src="images/land/land1.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
+                    <img src="images/land/land2.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
+                    <img src="images/land/land3.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
+                    <img src="images/land/land4.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
+                    <img src="images/land/land5.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
+                    <img src="images/art/art8.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art9.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art10.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project4" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('project4')">&times;</span>
+            <div class="hero-container">
+                <div class="slide-number">1 / 5</div>
+                <a class="prev" onclick="moveImage('project4', -1)">&#10094;</a>
+                <img src="images/air/air1.jpg" class="modal-hero-img">
+                <a class="next" onclick="moveImage('project4', 1)">&#10095;</a>
+            </div>
+            <div class="modal-text">
+                <h2>The skies above</h2>
+                <p>From a young age I was attracted to the skies, be it flying or anything else. Over the years I took several flying lessons (on Cessnas), took a parachuting course, built and flew model airplanes and now I'm working on my drone license. Although not in the seat, here are a few pictures of flying machines and more...</p>
+                <div class="modal-gallery-grid">
+                    <img src="images/air/air1.jpg" class="modal-gallery-img" onclick="changeImage('project4', this.src)">
+                    <img src="images/air/air2.jpg" class="modal-gallery-img" onclick="changeImage('project4', this.src)">
+                    <img src="images/air/air3.jpg" class="modal-gallery-img" onclick="changeImage('project4', this.src)">
+                    <img src="images/air/air4.jpg" class="modal-gallery-img" onclick="changeImage('project4', this.src)">
+                    <img src="images/air/air5.jpg" class="modal-gallery-img" onclick="changeImage('project4', this.src)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project5" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('project5')">&times;</span>
+            <div class="hero-container">
+                <div class="slide-number">1 / 7</div>
+                <a class="prev" onclick="moveImage('project5', -1)">&#10094;</a>
+                <img src="images/art/art1.jpg" class="modal-hero-img">
+                <a class="next" onclick="moveImage('project5', 1)">&#10095;</a>
+            </div>
+            <div class="modal-text">
+                <h2>Visual arts</h2>
+                <p>Be it drawing, manual rendering, painting, photography or computer arts. I enjoy putting pen to paper, brush to canvas and stylus to artboard every once in a while. Sometimes to reflect or interpret what is around me and somtimes I just let my imagination go.</p>
+                <div class="modal-gallery-grid">
+                    <img src="images/art/art1.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art2.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art3.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art4.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art5.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art6.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art7.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project6" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('project6')">&times;</span>
+            <div class="hero-container">
+                <div class="slide-number">1 / 20</div>
+                <a class="prev" onclick="moveImage('project6', -1)">&#10094;</a>
+                <img src="images/cars/car1.jpg" class="modal-hero-img">
+                <a class="next" onclick="moveImage('project6', 1)">&#10095;</a>
+            </div>
+            <div class="modal-text">
+                <h2>Classic Cars</h2>
+                <p>In 2019 when my MR2 became 30, I registered it as a classic car, since then I take part in calssic car meets, classic car trips and more. On top of that since I always had a fascination for cars, it's the reason I studied industrial design. Whenever I see interesting cars, I take a picture, here's a small sampling</p>
+                <div class="modal-gallery-grid">
+                    <img src="images/cars/car1.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car2.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car3.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car4.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car5.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car6.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car7.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car8.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car9.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car10.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car11.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car12.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">                    
+                    <img src="images/cars/car13.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car14.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car15.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car16.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
+                    <img src="images/cars/car17.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">                    
+                    <img src="images/cars/car18.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car19.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car20.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = "block";
+            document.body.style.overflow = "hidden";
+            updateCounter(id);
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function changeImage(modalId, element) {
+            const modal = document.getElementById(modalId);
+            const heroImg = modal.querySelector('.modal-hero-img');
+            heroImg.src = element.src;
+            updateCounter(modalId);
+        }
+
+        function moveImage(modalId, direction) {
+            const modal = document.getElementById(modalId);
+            const heroImg = modal.querySelector('.modal-hero-img');
+            const galleryImages = Array.from(modal.querySelectorAll('.modal-gallery-grid img'));
+            let currentIndex = galleryImages.findIndex(img => img.getAttribute('src') === heroImg.getAttribute('src'));
+
+            currentIndex += direction;
+            if (currentIndex >= galleryImages.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+
+            heroImg.src = galleryImages[currentIndex].getAttribute('src');
+            updateCounter(modalId);
+        }
+
+        function updateCounter(modalId) {
+            const modal = document.getElementById(modalId);
+            const heroImg = modal.querySelector('.modal-hero-img');
+            const galleryImages = Array.from(modal.querySelectorAll('.modal-gallery-grid img'));
+            const counter = modal.querySelector('.slide-number');
+            
+            let currentIndex = galleryImages.findIndex(img => img.getAttribute('src') === heroImg.getAttribute('src'));
+            
+            // Update the text (e.g., 2 / 15)
+            if (counter) {
+                counter.innerText = (currentIndex + 1) + " / " + galleryImages.length;
+            }
+
+            // Remove 'active' class from all thumbs, add to current
+            galleryImages.forEach(img => img.classList.remove('active'));
+            if(currentIndex > -1) galleryImages[currentIndex].classList.add('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+</body>
+</html>
