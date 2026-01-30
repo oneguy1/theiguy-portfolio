@@ -177,6 +177,14 @@
                     <p>A simple AW11 keychain</p>
                 </div>
             </div>
+
+            <div class="project-card" onclick="openModal('modal3')">
+                <img src="3dmodels/laptop_stand1.jpg" alt="Project 3 Thumb" class="card-thumb">
+                <div class="card-info">
+                    <h2>Laptop stand</h2>
+                    <p>A desktop/wallmount vertical laptop stand. Since I work with monitors and a keyboard when at home, I designed a simple solution to hold my laptop upright.</p>
+                </div>
+            </div>
             
         </main>
         
@@ -187,7 +195,7 @@
     <div id="modal1" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
-            <h2 class="modal-title">Mechanical Assembly Viewer</h2>
+            <h2 class="modal-title">Hex tool organizer</h2>
             
             <model-viewer 
                 src="3dmodels/hex_tool.glb" 
@@ -210,7 +218,7 @@
     <div id="modal2" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
-            <h2 class="modal-title">Product Concept Viewer</h2>
+            <h2 class="modal-title">Simple MR2 keychain</h2>
             
             <model-viewer 
                 src="3dmodels/mk1mr2.glb" 
@@ -221,11 +229,36 @@
                 poster="https://via.placeholder.com/800x500/1a1a1a/48C1CF?text=Loading+3D+Model..."
             ></model-viewer>
 
-            <h3>Render Gallery</h3>
+            <h3>Image Gallery</h3>
             <div class="modal-gallery-grid">
                 <img src="3dmodels/mr2_1.jpg" class="modal-gallery-img">
                 <img src="3dmodels/mr2_2.jpg" class="modal-gallery-img">
                 <img src="3dmodels/mr2_3.jpg" class="modal-gallery-img">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h2 class="modal-title">Laptop stand</h2>
+            
+            <model-viewer 
+                src="3dmodels/laptop_stand.glb" 
+                alt="Laptop stand" 
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1"
+                poster="https://via.placeholder.com/800x500/1a1a1a/48C1CF?text=Loading+3D+Model..."
+            ></model-viewer>
+
+            <h3>Render Gallery</h3>
+            <div class="modal-gallery-grid">
+                <img src="3dmodels/laptop_stand1.jpg" class="modal-gallery-img">
+                <img src="3dmodels/laptop_stand2.jpg" class="modal-gallery-img">
+                <img src="3dmodels/laptop_stand3.jpg" class="modal-gallery-img">
+                <img src="3dmodels/laptop_stand4.jpg" class="modal-gallery-img">
+                <img src="3dmodels/laptop_stand5.jpg" class="modal-gallery-img">
             </div>
         </div>
     </div>
