@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The iGuy | Portfolio</title>
+    <title>The iGuy | Developer & Designer</title>
     <style>
+        /* --- CSS VARIABLES: Matching your Logo Colors --- */
         :root {
             --teal: #48C1CF;
             --dark-grey: #1a1a1a;
@@ -12,138 +13,210 @@
             --sub-text: #b0b0b0;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0f0f 0%, #1c3d42 100%);
-            background-attachment: fixed;
-            color: var(--light-text);
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-
-        /* --- NAVIGATION BAR --- */
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 20px 0;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(72, 193, 207, 0.2);
-        }
-
-        nav a {
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1c3d42 100%);
+            background-attachment: fixed;
             color: var(--light-text);
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
-        nav a:hover { color: var(--teal); }
+        /* --- HEADER SECTION --- */
+        header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+        }
 
-        header { text-align: center; margin: 60px 0; }
-        header h1 { font-size: 3rem; margin-bottom: 10px; color: var(--teal); }
+        .logo-placeholder {
+            width: 140px;
+            height: 100px;
+            'background: rgba(255, 255, 255, 0.05);'
+            'border: 2px dashed var(--teal);'
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        /* --- GRID SYSTEM --- */
-        .grid {
+            font-size: 12px;
+            color: var(--teal);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--teal);
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            color: var(--sub-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- NAVIGATION GRID --- */
+        .nav-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-top: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(72, 193, 207, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            transition: 0.3s;
+        .nav-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
             text-decoration: none;
-            color: inherit;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .nav-card:hover {
+            transform: translateY(-10px);
             border-color: var(--teal);
-            background: rgba(72, 193, 207, 0.05);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
-        .card h2 { color: var(--teal); margin-bottom: 10px; }
-
-        /* --- ABOUT & CONTACT --- */
-        .section-box {
-            margin-top: 60px;
-            padding: 40px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 15px;
-            border: 1px solid rgba(72,193,207,0.1);
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: #222;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .btn-contact {
-            display: inline-block;
-            background: var(--teal);
-            color: var(--dark-grey);
-            padding: 12px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
+        .card-content {
+            padding: 25px;
         }
 
-        footer { text-align: center; margin-top: 80px; padding-bottom: 40px; color: #555; }
+        .card-content h2 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--teal);
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: var(--sub-text);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* Responsive Mobile Tweak */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .subtitle { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="snippets.html">Code Snippets</a>
-        <a href="blog.html">Blog</a>
-        <a href="links.html">Useful Links</a>
-    </nav>
+    <header>
+        <div class="logo-placeholder">
+            <img src="TheiGuy.png" alt="Logo" style="width: 100%; height: auto; border-radius: 50%;">
+        </div>
+        
+        <div class="subtitle">Developer & Designer</div>
+        <p class="bio">
+            CSM, Tech Support Manager & Industrial Designer passionate about creating innovative solutions through code and design.
+        </p>
+    </header>
 
-    <div class="container">
-        <header>
-            <h1>The iGuy</h1>
-            <p>Developer | Tech Enthusiast | Visual Artist</p>
-        </header>
+    <main class="nav-container">
+        
+        <a href="industrial-design.html" class="nav-card">
+            <img src="images/ge_safe.jpg" alt="Industrial Design" class="card-image">
+            <div class="card-content">
+                <h2>Industrial Design</h2>
+                <p>Creating functional and beautiful products that solve real-world problems.</p>
+                <p>A few projects from my past including Logix Design Inc and more.</p>
+            </div>
+        </a>
 
-        <main class="grid">
-            <a href="snippets.html" class="card">
+        <a href="3d-modeling.html" class="nav-card">
+            <img src="images/3d.jpg" alt="3D Modeling" class="card-image">
+            <div class="card-content">
+                <h2>3D Modeling</h2>
+                <p>Bringing ideas to life in three dimensions with precision and creativity.</p>
+            </div>
+        </a>
+
+        <a href="code-snippets.html" class="nav-card">
+            <img src="images/code.jpg" alt="Code Snippets" class="card-image">
+            <div class="card-content">
                 <h2>Code Snippets</h2>
-                <p>Technical solutions including my <b>File Renamer GUI</b> and SQL optimization tricks.</p>
-            </a>
+                <p>Useful code examples and solutions for day-to-day work challenges. In bash, Python & SQL.</p>
+            </div>
+        </a>
 
-            <a href="blog.html" class="card">
-                <h2>Blog</h2>
-                <p>Read my latest thoughts on software development and 3D art projects.</p>
-            </a>
+        <a href="hobbies.html" class="nav-card">
+            <img src="images/hobbies.jpg" alt="Hobbies" class="card-image">
+            <div class="card-content">
+                <h2>Hobbies</h2>
+                <p>Pictures and clips from my hobbies in the air, on land and below the surface of the sea</p>
+            </div>
+        </a>
 
-            <a href="links.html" class="card">
+        <a href="blog.html" class="nav-card">
+            <img src="images/blog_image.jpg" alt="Blog" class="card-image">
+            <div class="card-content">
+                <h2>My blog</h2>
+                <p>A collection of thoughts some already posted in the past</p>
+            </div>
+        </a>
+
+        <a href="links.html" class="nav-card">
+            <img src="images/links-hero.jpg" alt="Useful Links" class="card-image">
+            <div class="card-content">
                 <h2>Useful Links</h2>
-                <p>A curated collection of UUID generators, documentation, and dev tools.</p>
-            </a>
-        </main>
+                <p>A curated collection of useful links, dev tools, and external resources.</p>
+            </div>
+        </a>
 
-        <section class="section-box">
-            <h2 style="color: var(--teal);">About Me</h2>
-            <p>I'm a tech enthusiast with a passion for clean code and classic machinery. Whether it's debugging a Python script or tuning a supercharged engine, I thrive on solving complex puzzles.</p>
-        </section>
+    </main>
 
-        <section style="text-align: center; margin-top: 60px;">
-            <h2 style="color: var(--teal);">Get In Touch</h2>
-            <p>Have a question about my projects or just want to talk tech?</p>
-            <a href="mailto:your-email@theiguy.ca" class="btn-contact">Email Me</a>
-        </section>
+    <section style="margin-top: 60px; padding: 40px; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid rgba(72,193,207,0.1);">
+        <h2 style="color: #48C1CF; margin-bottom: 15px;">About Me</h2>
+        <p>I'm an industrial designer at heart, with a strong technical inclination, everything around me interests me. I feel that every day is a new lesson and as long as I learn something new, the day is a good one. I thrive on solving puzzles, be it creating scripts, querying data, designing something or actual puzzles.</p>
+    </section>
 
-        <footer>&copy; 2026 The iGuy</footer>
-    </div>
+    <section style="margin-top: 40px; text-align: center; padding: 40px;">
+        <h2 style="color: #48C1CF; margin-bottom: 10px;">Get In Touch</h2>
+        <p style="margin-bottom: 20px;">Have a question about my projects, interested in some 3D, design or just have a comment</p>
+        <a href="mailto:guy@theiguy.ca" style="background: #48C1CF; color: #1a1a1a; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">Email Me</a>
+    </section>
+
+    <footer>
+        &copy; 2026 The iGuy | Created on Mac
+    </footer>
 
 </body>
 </html>
