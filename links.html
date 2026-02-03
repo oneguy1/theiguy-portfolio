@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useful Links | The iGuy</title>
+    <style>
+    :root {
+        --teal: #48C1CF;
+        --dark-grey: #1a1a1a;
+        --card-bg: #242424;
+        --light-text: #ffffff;
+        --sub-text: #b0b0b0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #0f0f0f 0%, #1c3d42 100%);
+        background-attachment: fixed;
+        color: var(--light-text);
+        line-height: 1.6;
+        padding: 40px 20px;
+    }
+
+    .container { max-width: 1000px; margin: 0 auto; }
+    nav { margin-bottom: 40px; }
+    .back-link { color: var(--teal); text-decoration: none; font-weight: 500; }
+
+    header { margin-bottom: 50px; }
+    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    header p { color: var(--sub-text); }
+
+    /* --- LINK GRID --- */
+    .links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+    }
+
+    .link-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(72, 193, 207, 0.2);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .link-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--teal);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .link-image {
+        width: 100%;
+        height: 160px;
+        background: #111; /* Fallback color */
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .link-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .link-content h2 {
+        color: var(--teal);
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+
+    .link-content p {
+        color: var(--sub-text);
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+        flex-grow: 1;
+    }
+
+    .visit-btn {
+        display: inline-block;
+        text-align: center;
+        background: transparent;
+        border: 1px solid var(--teal);
+        color: var(--teal);
+        padding: 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .visit-btn:hover {
+        background: var(--teal);
+        color: var(--dark-grey);
+    }
+
+    footer { text-align: center; margin-top: 80px; color: #555; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <nav><a href="index.html" class="back-link">← Back to Portfolio</a></nav>
+
+        <header>
+            <h1>Useful Links</h1>
+            <p>A curated list of tools and resources I use for development and data management.</p>
+        </header>
+
+        <main class="links-grid">
+            <div class="link-card">
+                <img src="images/links/uuid-gen.jpg" alt="UUID Generator Screenshot" class="link-image">
+                <div class="link-content">
+                    <h2>Online UUID Generator</h2>
+                    <p>A very useful online tool for when you need to generate UUIDs quickly. Supports bulk generation of up to 500 UUIDs at a time.</p>
+                    <a href="https://www.uuidgenerator.net/" target="_blank" class="visit-btn">Visit Website →</a>
+                </div>
+            </div>
+
+            <div class="link-card">
+                <img src="images/links/regex101.jpg" alt="Regex101 Screenshot" class="link-image">
+                <div class="link-content">
+                    <h2>Regex101</h2>
+                    <p>Essential for testing the regular expressions used in scripts like my <b>File Renamer GUI</b>. It provides real-time explanation and debugging.</p>
+                    <a href="https://regex101.com/" target="_blank" class="visit-btn">Visit Website →</a>
+                </div>
+            </div>
+
+            <div class="link-card">
+                <img src="images/links/tkinter.jpg" alt="Tkinter Docs Screenshot" class="link-image">
+                <div class="link-content">
+                    <h2>Tkinter Documentation</h2>
+                    <p>The standard Python interface to the Tcl/Tk GUI toolkit, which powers my desktop applications.</p>
+                    <a href="https://docs.python.org/3/library/tkinter.html" target="_blank" class="visit-btn">Visit Website →</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>&copy; 2026 The iGuy</footer>
+    </div>
+
+</body>
+</html>
