@@ -341,7 +341,7 @@
                 <img src="images/art/art1.jpg" class="modal-hero-img">
                 <video class="modal-hero-vid" style="display:none;" controls muted loop></video>
                 
-                <div id="caption-project5" class="hero-caption">Comment 1</div>
+                <div id="caption-project5" class="hero-caption">An early on scifi landscape I created in  3D somtimes in the 90's</div>
 
                 <a class="next" onclick="moveImage('project5', 1)">&#10095;</a>
             </div>
@@ -404,84 +404,105 @@
     </div>
 
     <script>
-        function openModal(id) {
-            document.getElementById(id).style.display = "block";
-            document.body.style.overflow = "hidden";
-            updateCounter(id);
+function openModal(id) {
+    document.getElementById(id).style.display = "block";
+    document.body.style.overflow = "hidden";
+    updateCounter(id);
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+    // Stop any playing video when closing
+    const vid = modal.querySelector('.modal-hero-vid');
+    if(vid) {
+        vid.pause();
+        vid.src = ""; // Clear source to stop buffering
+    }
+}
+
+function changeImage(modalId, element) {
+    const modal = document.getElementById(modalId);
+    const heroImg = modal.querySelector('.modal-hero-img');
+    const heroVid = modal.querySelector('.modal-hero-vid');
+    const captionArea = document.getElementById('caption-' + modalId);
+    
+    // 1. Handle the Caption
+    const newCaption = element.getAttribute('data-caption');
+    if (captionArea && newCaption) {
+        captionArea.innerText = newCaption;
+    } else if (captionArea) {
+        captionArea.innerText = ""; // Clear if no caption provided
+    }
+
+    // 2. Handle the Media Swap (Image vs Video)
+    const videoSrc = element.getAttribute('data-video');
+    
+    if (videoSrc) {
+        // Show Video, Hide Image
+        if(heroImg) heroImg.style.display = "none";
+        heroVid.style.display = "block";
+        heroVid.src = videoSrc;
+        heroVid.play();
+    } else {
+        // Show Image, Hide Video
+        if(heroVid) {
+            heroVid.pause();
+            heroVid.style.display = "none";
         }
+        heroImg.style.display = "block";
+        heroImg.src = element.src;
+    }
+    
+    updateCounter(modalId);
+}
 
-        function closeModal(id) {
-            const modal = document.getElementById(id);
-            modal.style.display = "none";
-            document.body.style.overflow = "auto";
-            // Stop any playing video when closing
-            const vid = modal.querySelector('.modal-hero-vid');
-            if(vid) vid.pause();
-        }
+function moveImage(modalId, direction) {
+    const modal = document.getElementById(modalId);
+    const galleryThumbs = Array.from(modal.querySelectorAll('.modal-gallery-grid img'));
+    
+    // Find which thumb is currently 'active'
+    let currentIndex = galleryThumbs.findIndex(img => img.classList.contains('active'));
 
-        function changeImage(modalId, element) {
-            const modal = document.getElementById(modalId);
-            const heroImg = modal.querySelector('.modal-hero-img');
-            const heroVid = modal.querySelector('.modal-hero-vid');
-            
-            // Check if this thumb is a video
-            const videoSrc = element.getAttribute('data-video');
-            
-            if (videoSrc) {
-                heroImg.style.display = "none";
-                heroVid.style.display = "block";
-                heroVid.src = videoSrc;
-                heroVid.play();
-            } else {
-                if(heroVid) {
-                    heroVid.pause();
-                    heroVid.style.display = "none";
-                }
-                heroImg.style.display = "block";
-                heroImg.src = element.src;
-            }
-            updateCounter(modalId);
-        }
+    // Calculate new index
+    currentIndex += direction;
+    if (currentIndex >= galleryThumbs.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = galleryThumbs.length - 1;
 
-        function moveImage(modalId, direction) {
-            const modal = document.getElementById(modalId);
-            const galleryThumbs = Array.from(modal.querySelectorAll('.modal-gallery-grid img'));
-            let currentIndex = galleryThumbs.findIndex(img => img.classList.contains('active'));
+    // Trigger the change using the new thumbnail
+    changeImage(modalId, galleryThumbs[currentIndex]);
+}
 
-            currentIndex += direction;
-            if (currentIndex >= galleryThumbs.length) currentIndex = 0;
-            if (currentIndex < 0) currentIndex = galleryThumbs.length - 1;
+function updateCounter(modalId) {
+    const modal = document.getElementById(modalId);
+    const heroImg = modal.querySelector('.modal-hero-img');
+    const heroVid = modal.querySelector('.modal-hero-vid');
+    const galleryThumbs = Array.from(modal.querySelectorAll('.modal-gallery-grid img'));
+    const counter = modal.querySelector('.slide-number');
+    
+    // Determine active index by checking the hero sources
+    let currentIndex = galleryThumbs.findIndex(img => {
+        const isVid = img.getAttribute('data-video');
+        if (isVid && heroVid.src.includes(isVid)) return true;
+        return img.src === heroImg.src;
+    });
 
-            changeImage(modalId, galleryThumbs[currentIndex]);
-        }
+    if (counter) {
+        counter.innerText = (currentIndex + 1) + " / " + galleryThumbs.length;
+    }
 
-        function updateCounter(modalId) {
-            const modal = document.getElementById(modalId);
-            const heroImg = modal.querySelector('.modal-hero-img');
-            const heroVid = modal.querySelector('.modal-hero-vid');
-            const galleryThumbs = Array.from(modal.querySelectorAll('.modal-gallery-grid img'));
-            const counter = modal.querySelector('.slide-number');
-            
-            // Current "Active" is determined by matching the src (either img or video data)
-            let currentIndex = galleryThumbs.findIndex(img => {
-                const isVid = img.getAttribute('data-video');
-                if (isVid) return heroVid.src.includes(isVid);
-                return img.src === heroImg.src;
-            });
+    // Update the 'active' border on the thumbnails
+    galleryThumbs.forEach(img => img.classList.remove('active'));
+    if(currentIndex > -1) galleryThumbs[currentIndex].classList.add('active');
+}
 
-            if (counter) {
-                counter.innerText = (currentIndex + 1) + " / " + galleryThumbs.length;
-            }
-
-            galleryThumbs.forEach(img => img.classList.remove('active'));
-            if(currentIndex > -1) galleryThumbs[currentIndex].classList.add('active');
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal-overlay')) {
-                closeModal(event.target.id);
-            }
-        }
+// Close modal if user clicks outside the content box
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal-overlay')) {
+        closeModal(event.target.id);
+    }
+}
     </script>
 </body>
 </html>
