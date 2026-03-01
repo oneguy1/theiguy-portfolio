@@ -160,21 +160,6 @@
         border-top: 1px solid rgba(255,255,255,0.1);
     }
 
-    .hero-caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7); /* Dark see-through background */
-        color: var(--teal);
-        padding: 12px;
-        font-size: 0.95rem;
-        text-align: center;
-        backdrop-filter: blur(5px); /* Blurs what's behind the text for readability */
-        border-top: 1px solid rgba(72, 193, 207, 0.3);
-        z-index: 2600;
-    }
-
     .modal-gallery-img {
         width: 100%;
         height: 70px;
@@ -335,31 +320,24 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('project5')">&times;</span>
             <div class="hero-container">
-                <div class="slide-number">1 / 10</div>
+                <div class="slide-number">1 / 9</div>
                 <a class="prev" onclick="moveImage('project5', -1)">&#10094;</a>
-            
                 <img src="images/art/art1.jpg" class="modal-hero-img">
-                <video class="modal-hero-vid" style="display:none;" controls muted loop></video>
-                
-                <div id="caption-project5" class="hero-caption">Comment 1</div>
-
                 <a class="next" onclick="moveImage('project5', 1)">&#10095;</a>
             </div>
             <div class="modal-text">
                 <h2>Visual arts</h2>
-                <p>Be it drawing, manual rendering, painting, photography or computer arts...</p>
-            
+                <p>Be it drawing, manual rendering, painting, photography or computer arts. I enjoy putting pen to paper, brush to canvas and stylus to artboard every once in a while. Sometimes to reflect or interpret what is around me and somtimes I just let my imagination go.</p>
                 <div class="modal-gallery-grid">
-                    <img src="images/art/art1.jpg" class="modal-gallery-img" data-caption="An early on scifi landscape I created in  3D somtimes in the 90's" onclick="changeImage('project5', this)">
-                    <img src="images/art/art2.jpg" class="modal-gallery-img" data-caption="A quick pencil drawing I did while on vacation" onclick="changeImage('project5', this)">
-                    <img src="images/art/art3.jpg" class="modal-gallery-img" data-caption="A quick pencil drawing I did while on vacation" onclick="changeImage('project5', this)">
-                    <img src="images/art/art4.jpg" class="modal-gallery-img" data-caption="A quick pencil drawing I did while on vacation" onclick="changeImage('project5', this)">
-                    <img src="images/art/art5.jpg" class="modal-gallery-img" data-caption="A 3D design for a electric charging station I created with Stratavision 3D when EV's started. Still looking for the animation" onclick="changeImage('project5', this)">
-                    <img src="images/art/art6.jpg" class="modal-gallery-img" data-caption="Night photography of a sundawn" onclick="changeImage('project5', this)">
-                    <img src="images/art/art7.jpg" class="modal-gallery-img" data-caption="Night photography of a sundawn" onclick="changeImage('project5', this)">
-                    <img src="images/art/art11.jpg" class="modal-gallery-img" data-caption="Photograph taken with a Nikonos V at Williams Island,FL won me the first prize in a competition" onclick="changeImage('project5', this)">
-                    <img src="images/art/art12.jpg" class="modal-gallery-img" data-caption="BW photograph painted manually - Toronto, Canada" onclick="changeImage('project5', this)">
-                    <img src="images/art/art13.jpg" class="modal-gallery-img" data-caption="BW photograph taken from my MR2 on the DVP" onclick="changeImage('project5', this)">
+                    <img src="images/art/art1.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art2.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art3.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art4.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art5.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art6.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art7.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art11.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/art/art12.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
                 </div>
             </div>
         </div>
