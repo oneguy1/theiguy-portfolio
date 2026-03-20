@@ -165,12 +165,12 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(0, 0, 0, 0.7); /* Dark see-through background */
+        background: rgba(0, 0, 0, 0.7);
         color: var(--teal);
         padding: 12px;
         font-size: 0.95rem;
         text-align: center;
-        backdrop-filter: blur(5px); /* Blurs what's behind the text for readability */
+        backdrop-filter: blur(5px);
         border-top: 1px solid rgba(72, 193, 207, 0.3);
         z-index: 2600;
     }
@@ -277,6 +277,8 @@
         </div>
     </div>
     
+    <!-- FIX 1: project3 — all thumbnails now pass 'this' (not this.src),
+         and the last 3 were wrongly pointing to 'project5'; corrected to 'project3' -->
     <div id="project3" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('project3')">&times;</span>
@@ -290,14 +292,14 @@
                 <h2>Travel</h2>
                 <p>Having lived on 3 continents and speaking several languages, I always am interested in visiting new places, learning about new cultures and absorbing the scenery. Here is a small selection with a mix of nature and urban scenes</p>
                 <div class="modal-gallery-grid">
-                    <img src="images/land/land1.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
-                    <img src="images/land/land2.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
-                    <img src="images/land/land3.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
-                    <img src="images/land/land4.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
-                    <img src="images/land/land5.jpg" class="modal-gallery-img" onclick="changeImage('project3', this.src)">
-                    <img src="images/art/art8.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
-                    <img src="images/art/art9.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
-                    <img src="images/art/art10.jpg" class="modal-gallery-img" onclick="changeImage('project5', this.src)">
+                    <img src="images/land/land1.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
+                    <img src="images/land/land2.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
+                    <img src="images/land/land3.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
+                    <img src="images/land/land4.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
+                    <img src="images/land/land5.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
+                    <img src="images/art/art8.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
+                    <img src="images/art/art9.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
+                    <img src="images/art/art10.jpg" class="modal-gallery-img" onclick="changeImage('project3', this)">
                 </div>
             </div>
         </div>
@@ -327,7 +329,7 @@
                     <img src="images/air/air2.jpg" class="modal-gallery-img" data-caption="A picture of a WWI De Havilland Moth at an air museum (CAN)" onclick="changeImage('project4', this)">
                     <img src="images/air/air3.jpg" class="modal-gallery-img" data-caption="A picture of a McDonnel CF101 Voodoo at an air museum (CAN)" onclick="changeImage('project4', this)">
                     <img src="images/air/air4.jpg" class="modal-gallery-img" data-caption="A picture of a De Havilland Tiger Moth at an air museum (CAN)" onclick="changeImage('project4', this)">
-                    <img src="images/air/air5.jpg" class="modal-gallery-img" data-caption="A good looking rainbow in Thornhill" onclick="changeImage('project4', this)">
+                    <img src="images/air/air5.jpg" class="modal-gallery-img" data-caption="A good looking rainbow in Tho" onclick="changeImage('project4', this)">
                     <img src="images/air/skydive_guy.jpg" data-video="images/air/skydive_guy.mp4" class="modal-gallery-img" onclick="changeImage('project4', this)" style="border: 1px solid var(--teal);">
                 </div>
             </div>
@@ -368,6 +370,7 @@
         </div>
     </div>
 
+    <!-- FIX 2: project6 — all thumbnails now pass 'this' instead of 'this.src' -->
     <div id="project6" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('project6')">&times;</span>
@@ -381,26 +384,26 @@
                 <h2>Classic Cars</h2>
                 <p>In 2019 when my MR2 became 30, I registered it as a classic car, since then I take part in calssic car meets, classic car trips and more. On top of that since I always had a fascination for cars, it's the reason I studied industrial design. Whenever I see interesting cars, I take a picture, here's a small sampling</p>
                 <div class="modal-gallery-grid">
-                    <img src="images/cars/car1.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car2.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car3.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car4.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car5.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car6.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car7.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car8.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
-                    <img src="images/cars/car9.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
-                    <img src="images/cars/car10.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car11.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car12.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">                    
-                    <img src="images/cars/car13.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
-                    <img src="images/cars/car14.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
-                    <img src="images/cars/car15.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
-                    <img src="images/cars/car16.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">
-                    <img src="images/cars/car17.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)">                    
-                    <img src="images/cars/car18.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
-                    <img src="images/cars/car19.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
-                    <img src="images/cars/car20.jpg" class="modal-gallery-img" onclick="changeImage('project6', this.src)"> 
+                    <img src="images/cars/car1.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car2.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car3.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car4.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car5.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car6.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car7.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car8.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
+                    <img src="images/cars/car9.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
+                    <img src="images/cars/car10.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car11.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car12.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">                    
+                    <img src="images/cars/car13.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
+                    <img src="images/cars/car14.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
+                    <img src="images/cars/car15.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
+                    <img src="images/cars/car16.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
+                    <img src="images/cars/car17.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">                    
+                    <img src="images/cars/car18.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
+                    <img src="images/cars/car19.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
+                    <img src="images/cars/car20.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)"> 
                 </div>
             </div>
         </div>
@@ -458,6 +461,11 @@ function changeImage(modalId, element) {
         heroImg.src = element.src;
     }
     
+    // Update active thumbnail highlight
+    const galleryThumbs = Array.from(modal.querySelectorAll('.modal-gallery-grid img'));
+    galleryThumbs.forEach(img => img.classList.remove('active'));
+    element.classList.add('active');
+
     updateCounter(modalId);
 }
 
@@ -487,7 +495,7 @@ function updateCounter(modalId) {
     // Determine active index by checking the hero sources
     let currentIndex = galleryThumbs.findIndex(img => {
         const isVid = img.getAttribute('data-video');
-        if (isVid && heroVid.src.includes(isVid)) return true;
+        if (isVid && heroVid && heroVid.src.includes(isVid)) return true;
         return img.src === heroImg.src;
     });
 
