@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LJS5W9Q4Z0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LJS5W9Q4Z0');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Title | The iGuy Blog</title>
+    <style>
+        :root {
+            --teal: #48C1CF;
+            --dark-grey: #1a1a1a;
+            --bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #1c3d42 100%);
+            --light-text: #ffffff;
+            --sub-text: #b0b0b0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--light-text);
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 750px; margin: 0 auto; }
+        
+        nav { margin-bottom: 40px; }
+        .back-link { color: var(--teal); text-decoration: none; font-weight: 500; }
+
+        article header { margin-bottom: 40px; }
+        .post-date { color: var(--teal); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+        h1 { font-size: 2.8rem; line-height: 1.2; margin: 10px 0; }
+        
+        .post-content img { 
+            width: 100%; 
+            border-radius: 12px; 
+            margin: 30px 0; 
+            border: 1px solid rgba(72, 193, 207, 0.2);
+        }
+
+        .post-content p { margin-bottom: 20px; font-size: 1.1rem; color: #e0e0e0; }
+
+        /* Styling for code snippets inside blog posts */
+        pre {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border-left: 4px solid var(--teal);
+            font-family: monospace;
+            margin: 25px 0;
+        }
+
+        footer { 
+            text-align: center; 
+            margin-top: 80px; 
+            padding-top: 20px; 
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #555; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav><a href="../blog.html" class="back-link">← Back to Blog Index</a></nav>
+
+        <article>
+            <header>
+                <div class="post-date">April 25, 2026</div>
+                <h1>Home projects... with AI</h1>
+            </header>
+
+            <div class="post-content">
+                <h2>And now to something completely different... or not</h2>
+                
+                <p>Up to now, I talked about AI and its impact on the industry at large. But lately, I’ve decided to move away from the theoretical and get my hands dirty with some practical implementation.</p>
+                
+                <p>In the last few weeks, I’ve found myself juggling several different projects simultaneously. It’s a bit of a "mad scientist" vibe in the lab right now, moving between hardware assembly, 3D design, and software development.</p>
+
+                <h3>The Resurrection of "Franky"</h3>
+                <p>It all started with a dead D40. Instead of letting it hit the scrap heap, I salvaged the usable components to build a custom desktop/server I’ve dubbed <strong>"Franky."</strong> There is something uniquely rewarding about piece-mailing a functional machine together from parts that were destined for the bin.</p>
+
+                <h3>Watching the Network Breathe</h3>
+                <p>With "Franky" and other devices running, visibility became the next priority. I’ve been implementing <strong>Prometheus</strong> across my network devices to gather metrics, piping everything into <strong>Grafana</strong> for visualization. Setting up the dashboards and fine-tuning the alerts has turned my home network from a "black box" into a fully observable environment.</p>
+
+                <h3>From Onshape to the Build Plate</h3>
+                <p>On the physical side of things, I’ve been spending time in <strong>Onshape</strong>, designing custom 3D parts to solve specific hardware needs. Seeing a design go from a digital workspace to a physical object on my 3D printer never gets old—it’s the ultimate bridge between "software" and "stuff."</p>
+                
+                <h3>Building Native with an AI Co-pilot</h3>
+                <p>Finally, I’ve been working on a <strong>Native Mac app</strong> specifically for home network monitoring. This is where the "with AI" part of the title really kicks in. By using AI as a high-speed collaborator, I’ve been able to navigate the complexities of native development and move from a blank slate to a functional tool in record time.</p>
+
+                <p>Working on all these threads at once can be chaotic, but it's where the most interesting connections happen. Whether it's salvaging old tech or leveraging the newest AI models, the goal remains the same: keep building.</p>
+
+                <p>So that's all for now.</p>
+            </div>
+        </article>
+
+        <footer>&copy; 2026 The iGuy</footer>
+    </div>
+
+</body>
+</html>
