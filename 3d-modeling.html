@@ -345,6 +345,20 @@
                 { src: "3dmodels/foosball_3.jpg", alt: "Foosball Bead, photo 3" },
                 { src: "3dmodels/foosball_4.jpg", alt: "Foosball Bead, photo 4" }
             ]
+        },
+        {
+            title: "Simple Headphone Stand",
+            blurb: "A barebones stand for standard over-ear headphones.",
+            description: "A barebones simple headphone stand which should fit most standard over-ear headphones.",
+            model: "3dmodels/simple_headphone_stand.glb",
+            orientation: "0deg 90deg 0deg",
+            cover: "3dmodels/headphone_1.jpg",
+            images: [
+                { src: "3dmodels/headphone_1.jpg", alt: "Simple Headphone Stand, photo 1" },
+                { src: "3dmodels/headphone_2.jpg", alt: "Simple Headphone Stand, photo 2" },
+                { src: "3dmodels/headphone_3.jpg", alt: "Simple Headphone Stand, photo 3" },
+                { src: "3dmodels/headphone_4.jpg", alt: "Simple Headphone Stand, photo 4" }
+            ]
         }
     ];
 
@@ -395,6 +409,7 @@
         modalDescription.textContent = project.description;
         viewer.alt = project.title + " 3D model";
         viewer.poster = project.images[0].src;
+        viewer.orientation = project.orientation || "0deg 0deg 0deg";
         viewer.src = project.model;
 
         heroImg.src = project.images[0].src;
