@@ -3,6 +3,26 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LJS5W9Q4Z0"></script>
     <script>
+
+    function labelGalleryImages() {
+        document.querySelectorAll(".modal-overlay").forEach((modal) => {
+            const heading = modal.querySelector("h2");
+            const name = heading ? heading.textContent.trim() : "Project";
+            modal.querySelectorAll("img").forEach((img, index) => {
+                if (img.getAttribute("alt")) return;
+                const caption = img.getAttribute("data-caption");
+                img.alt = caption || (name + ", photo " + (index + 1));
+            });
+        });
+    }
+    let lastGalleryTrigger = null;
+    document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        const open = [...document.querySelectorAll(".modal-overlay")].find((modal) => modal.style.display === "block");
+        if (!open) return;
+        closeModal(open.id);
+    });
+
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -13,6 +33,13 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="Photos from cars, diving, travel, flying, and drawing.">
+    <meta property="og:title" content="Hobbies | The iGuy">
+    <meta property="og:description" content="Photos from cars, diving, travel, flying, and drawing.">
+    <meta property="og:image" content="https://theiguy.ca/TheiGuy.png">
+    <meta property="og:url" content="https://theiguy.ca/hobbies.html">
+    <link rel="stylesheet" href="styles.css">
     <title>Hobbies | The iGuy</title>
     <style>
     /* --- CSS VARIABLES --- */
@@ -192,45 +219,56 @@
 <body>
 
     <div class="container">
-        <nav><a href="index.html" class="back-link">← Back to Home</a></nav>
+        <nav class="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="industrial-design.html">Design</a>
+        <a href="3d-modeling.html">3D</a>
+        <a href="code-snippets.html">Code</a>
+        <a href="hobbies.html" aria-current="page">Hobbies</a>
+        <a href="blog.html">Blog</a>
+        <a href="links.html">Links</a>
+    </nav>
         <header>
             <h1>Hobbies</h1>
             <p>From the depths of the Red Sea to the classic car tracks.</p>
         </header>
 
         <main class="gallery-grid">
-            <div class="gallery-item" onclick="openModal('project1')">
-                <img src="images/hobbies.jpg" class="gallery-img">
+            <button type="button" class="gallery-item" aria-haspopup="dialog" onclick="openModal('project1')">
+                <img src="images/hobbies.jpg" class="gallery-img" alt="">
                 <div class="gallery-caption"><h3>Toyota MR2 Supercharged</h3></div>
-            </div>
-            <div class="gallery-item" onclick="openModal('project2')">
-                <img src="images/scuba/scuba1.jpg" class="gallery-img">
+            </button>
+            <button type="button" class="gallery-item" aria-haspopup="dialog" onclick="openModal('project2')">
+                <img src="images/scuba/scuba1.jpg" class="gallery-img" alt="">
                 <div class="gallery-caption"><h3>Water above and below</h3></div>
-            </div>
-            <div class="gallery-item" onclick="openModal('project3')">
-                <img src="images/land/land1.jpg" class="gallery-img">
+            </button>
+            <button type="button" class="gallery-item" aria-haspopup="dialog" onclick="openModal('project3')">
+                <img src="images/land/land1.jpg" class="gallery-img" alt="">
                 <div class="gallery-caption"><h3>Travel</h3></div>
-            </div>
-            <div class="gallery-item" onclick="openModal('project4')">
-                <img src="images/air/air1.jpg" class="gallery-img">
+            </button>
+            <button type="button" class="gallery-item" aria-haspopup="dialog" onclick="openModal('project4')">
+                <img src="images/air/air1.jpg" class="gallery-img" alt="">
                 <div class="gallery-caption"><h3>The skies above</h3></div>
-            </div>
-            <div class="gallery-item" onclick="openModal('project5')">
-                <img src="images/art/art1.jpg" class="gallery-img">
+            </button>
+            <button type="button" class="gallery-item" aria-haspopup="dialog" onclick="openModal('project5')">
+                <img src="images/art/art1.jpg" class="gallery-img" alt="">
                 <div class="gallery-caption"><h3>Visual arts</h3></div>
-            </div>
-            <div class="gallery-item" onclick="openModal('project6')">
-                <img src="images/cars/car1.jpg" class="gallery-img">
+            </button>
+            <button type="button" class="gallery-item" aria-haspopup="dialog" onclick="openModal('project6')">
+                <img src="images/cars/car1.jpg" class="gallery-img" alt="">
                 <div class="gallery-caption"><h3>Classic car exhibits</h3></div>
-            </div>
+            </button>
         </main>
-        <footer>&copy; 2026 The iGuy</footer>
+        <footer class="site-footer">
+        <p>&copy; 2026 The iGuy</p>
+        <p>This site uses Google Analytics.</p>
+    </footer>
     </div>
 
 
     <div id="project1" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('project1')">&times;</span>
+            <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('project1')">&times;</button>
             <div class="hero-container">
                 <div class="slide-number">1 / 5</div>
                 <a class="prev" onclick="moveImage('project1', -1)">&#10094;</a>
@@ -253,7 +291,7 @@
 
     <div id="project2" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('project2')">&times;</span>
+            <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('project2')">&times;</button>
             <div class="hero-container">
                 <div class="slide-number">1 / 8</div>
                 <a class="prev" onclick="moveImage('project2', -1)">&#10094;</a>
@@ -281,7 +319,7 @@
          and the last 3 were wrongly pointing to 'project5'; corrected to 'project3' -->
     <div id="project3" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('project3')">&times;</span>
+            <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('project3')">&times;</button>
             <div class="hero-container">
                 <div class="slide-number">1 / 8</div>
                 <a class="prev" onclick="moveImage('project3', -1)">&#10094;</a>
@@ -308,7 +346,7 @@
 
     <div id="project4" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('project4')">&times;</span>
+            <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('project4')">&times;</button>
             <div class="hero-container">
                 <div class="slide-number">1 / 6</div>
                 <a class="prev" onclick="moveImage('project4', -1)">&#10094;</a>
@@ -338,7 +376,7 @@
 
     <div id="project5" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('project5')">&times;</span>
+            <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('project5')">&times;</button>
             <div class="hero-container">
                 <div class="slide-number">1 / 10</div>
                 <a class="prev" onclick="moveImage('project5', -1)">&#10094;</a>
@@ -373,7 +411,7 @@
     <!-- FIX 2: project6 — all thumbnails now pass 'this' instead of 'this.src' -->
     <div id="project6" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('project6')">&times;</span>
+            <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('project6')">&times;</button>
             <div class="hero-container">
                 <div class="slide-number">1 / 20</div>
                 <a class="prev" onclick="moveImage('project6', -1)">&#10094;</a>
@@ -382,7 +420,7 @@
             </div>
             <div class="modal-text">
                 <h2>Classic Cars</h2>
-                <p>In 2019 when my MR2 became 30, I registered it as a classic car, since then I take part in calssic car meets, classic car trips and more. On top of that since I always had a fascination for cars, it's the reason I studied industrial design. Whenever I see interesting cars, I take a picture, here's a small sampling</p>
+                <p>In 2019 when my MR2 became 30, I registered it as a classic car, since then I take part in classic car meets, classic car trips and more. On top of that since I always had a fascination for cars, it's the reason I studied industrial design. Whenever I see interesting cars, I take a picture, here's a small sampling</p>
                 <div class="modal-gallery-grid">
                     <img src="images/cars/car1.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
                     <img src="images/cars/car2.jpg" class="modal-gallery-img" onclick="changeImage('project6', this)">
@@ -411,15 +449,19 @@
 
     <script>
 function openModal(id) {
+    lastGalleryTrigger = document.activeElement;
     document.getElementById(id).style.display = "block";
     document.body.style.overflow = "hidden";
     updateCounter(id);
+    const closeBtn = document.getElementById(id).querySelector(".close-btn");
+    if (closeBtn) closeBtn.focus();
 }
 
 function closeModal(id) {
     const modal = document.getElementById(id);
     modal.style.display = "none";
     document.body.style.overflow = "auto";
+    if (lastGalleryTrigger && lastGalleryTrigger.focus) lastGalleryTrigger.focus();
     // Stop any playing video when closing
     const vid = modal.querySelector('.modal-hero-vid');
     if(vid) {
@@ -507,6 +549,8 @@ function updateCounter(modalId) {
     galleryThumbs.forEach(img => img.classList.remove('active'));
     if(currentIndex > -1) galleryThumbs[currentIndex].classList.add('active');
 }
+
+labelGalleryImages();
 
 // Close modal if user clicks outside the content box
 window.onclick = function(event) {

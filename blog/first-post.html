@@ -13,7 +13,14 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Title | The iGuy Blog</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="Intro... to me">
+    <meta property="og:title" content="Intro... to me | The iGuy Blog">
+    <meta property="og:description" content="Intro... to me">
+    <meta property="og:image" content="https://theiguy.ca/TheiGuy.png">
+    <meta property="og:url" content="https://theiguy.ca/blog/first-post.html">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Intro... to me | The iGuy Blog</title>
     <style>
         :root {
             --teal: #48C1CF;
@@ -73,7 +80,15 @@
 <body>
 
     <div class="container">
-        <nav><a href="../blog.html" class="back-link">← Back to Blog Index</a></nav>
+        <nav class="site-nav" aria-label="Site">
+        <a href="../index.html">Home</a>
+        <a href="../industrial-design.html">Design</a>
+        <a href="../3d-modeling.html">3D</a>
+        <a href="../code-snippets.html">Code</a>
+        <a href="../hobbies.html">Hobbies</a>
+        <a href="../blog.html" aria-current="page">Blog</a>
+        <a href="../links.html">Links</a>
+    </nav>
 
         <article>
             <header>
@@ -86,7 +101,7 @@
                 
                 <!-- <img src="../images/blog/your-image.jpg" alt="Description of image"> -->
 
-                <p>It will vary from my thoughts about the integration of AI into the workforce, I aready posted some of them on linkedin.</p>
+                <p>It will vary from my thoughts about the integration of AI into the workforce, I already posted some of them on linkedin.</p>
                 <p> </p>
                 <p>I will try to have a new entry at least once every 2 weeks.</p>
                 <!-- <pre><code>print("Hello from the iGuy blog!")</code></pre> -->
@@ -95,7 +110,10 @@
             </div>
         </article>
 
-        <footer>&copy; 2026 The iGuy</footer>
+        <footer class="site-footer">
+        <p>&copy; 2026 The iGuy</p>
+        <p>This site uses Google Analytics.</p>
+    </footer>
     </div>
 
 </body>

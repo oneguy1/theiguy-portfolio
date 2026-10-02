@@ -15,6 +15,13 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="Industrial designer, CSM, and tech support manager. Design projects, 3D prints, and notes.">
+    <meta property="og:title" content="The iGuy | Developer & Designer">
+    <meta property="og:description" content="Industrial designer, CSM, and tech support manager. Design projects, 3D prints, and notes.">
+    <meta property="og:image" content="https://theiguy.ca/TheiGuy.png">
+    <meta property="og:url" content="https://theiguy.ca/">
+    <link rel="stylesheet" href="styles.css">
     <title>The iGuy | Developer & Designer</title>
     <style>
         /* --- CSS VARIABLES: Matching your Logo Colors --- */
@@ -142,92 +149,148 @@
             color: #555;
         }
 
+        header h1.logo-placeholder {
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0;
+            line-height: 0;
+            margin: 0 auto 20px;
+        }
+
+        .section-label {
+            max-width: 1100px;
+            margin: 8px auto 14px;
+            color: var(--sub-text);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .featured-grid { margin-bottom: 36px; }
+        .featured-grid .card-image { height: 280px; }
+
+        .secondary-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .secondary-grid .card-image,
+        .secondary-grid .code-face { height: 140px; }
+
+        .code-face {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #161616;
+            color: var(--teal);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .home-band {
+            max-width: 1100px;
+            margin: 40px auto 0;
+        }
+
         /* Responsive Mobile Tweak */
         @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
             .subtitle { font-size: 1.2rem; }
+            .featured-grid .card-image { height: 200px; }
         }
     </style>
 </head>
 <body>
 
+    <nav class="site-nav" aria-label="Site">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="industrial-design.html">Design</a>
+        <a href="3d-modeling.html">3D</a>
+        <a href="code-snippets.html">Code</a>
+        <a href="hobbies.html">Hobbies</a>
+        <a href="blog.html">Blog</a>
+        <a href="links.html">Links</a>
+    </nav>
+
     <header>
-        <div class="logo-placeholder">
-            <img src="TheiGuy.png" alt="Logo" style="width: 100%; height: auto; border-radius: 50%;">
-        </div>
-        
-        <div class="subtitle">Developer & Designer</div>
+        <h1 class="logo-placeholder">
+            <img src="TheiGuy.png" alt="" style="width: 100%; height: auto; border-radius: 50%;">
+            <span class="sr-only">The iGuy</span>
+        </h1>
+        <p class="subtitle">Industrial designer, CSM, and tech support manager</p>
         <p class="bio">
-            CSM, Tech Support Manager & Industrial Designer passionate about creating innovative solutions through code and design.
+            Design projects, 3D prints, and notes on building things.
         </p>
     </header>
 
-    <main class="nav-container">
-        
+    <p class="section-label">Work</p>
+    <main class="nav-container featured-grid">
         <a href="industrial-design.html" class="nav-card">
-            <img src="images/ge_safe.jpg" alt="Industrial Design" class="card-image">
+            <img src="images/ge_safe.jpg" alt="A manufactured safety product" class="card-image">
             <div class="card-content">
                 <h2>Industrial Design</h2>
-                <p>Creating functional and beautiful products that solve real-world problems.</p>
-                <p>A few projects from my past including Logix Design Inc and more.</p>
+                <p>Products from Logix Design and later work: sketches, models, and finished pieces.</p>
             </div>
         </a>
 
         <a href="3d-modeling.html" class="nav-card">
-            <img src="images/3d.jpg" alt="3D Modeling" class="card-image">
+            <img src="3dmodels/laptop_stand1.jpg" alt="A laptop held upright by a printed stand" class="card-image">
             <div class="card-content">
                 <h2>3D Modeling</h2>
-                <p>Bringing ideas to life in three dimensions with precision and creativity.</p>
+                <p>Parts designed to be printed, shown as models you can turn and as photos of the prints.</p>
             </div>
         </a>
+    </main>
 
+    <p class="section-label">Also here</p>
+    <div class="nav-container secondary-grid">
         <a href="code-snippets.html" class="nav-card">
-            <img src="images/code.jpg" alt="Code Snippets" class="card-image">
+            <div class="code-face" aria-hidden="true">Python · SQL · Bash</div>
             <div class="card-content">
                 <h2>Code Snippets</h2>
-                <p>Useful code examples and solutions for day-to-day work challenges. In bash, Python & SQL.</p>
+                <p>Small tools for storage math, SQL inserts, and searching logs.</p>
             </div>
         </a>
 
         <a href="hobbies.html" class="nav-card">
-            <img src="images/hobbies.jpg" alt="Hobbies" class="card-image">
+            <img src="images/hobbies.jpg" alt="A red Toyota MR2" class="card-image">
             <div class="card-content">
                 <h2>Hobbies</h2>
-                <p>Pictures and clips from my hobbies in the air, on land and below the surface of the sea</p>
+                <p>The MR2, diving, travel, flying, and drawing.</p>
             </div>
         </a>
 
         <a href="blog.html" class="nav-card">
-            <img src="images/blog_image.jpg" alt="Blog" class="card-image">
+            <img src="images/art/art1.jpg" alt="A science fiction landscape drawing" class="card-image">
             <div class="card-content">
-                <h2>My blog</h2>
-                <p>A collection of thoughts some already posted in the past</p>
+                <h2>Blog</h2>
+                <p>Notes on AI at work, and on building things at home.</p>
             </div>
         </a>
 
         <a href="links.html" class="nav-card">
-            <img src="images/links-hero.jpg" alt="Useful Links" class="card-image">
+            <img src="images/links/crealitycloud.jpg" alt="Creality Cloud model page" class="card-image">
             <div class="card-content">
                 <h2>Useful Links</h2>
-                <p>A curated collection of useful links, dev tools, and external resources.</p>
+                <p>Tools used for code, files, and 3D models.</p>
             </div>
         </a>
+    </div>
 
-    </main>
-
-    <section style="margin-top: 60px; padding: 40px; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid rgba(72,193,207,0.1);">
+    <section class="home-band" style="padding: 40px; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid rgba(72,193,207,0.1);">
         <h2 style="color: #48C1CF; margin-bottom: 15px;">About Me</h2>
         <p>I'm an industrial designer at heart, with a strong technical inclination, everything around me interests me. I feel that every day is a new lesson and as long as I learn something new, the day is a good one. I thrive on solving puzzles, be it creating scripts, querying data, designing something or actual puzzles.</p>
     </section>
 
-    <section style="margin-top: 40px; text-align: center; padding: 40px;">
+    <section class="home-band" style="text-align: center; padding: 40px;">
         <h2 style="color: #48C1CF; margin-bottom: 10px;">Get In Touch</h2>
         <p style="margin-bottom: 20px;">Have a question about my projects, interested in some 3D, design or just have a comment</p>
         <a href="mailto:guy@theiguy.ca" style="background: #48C1CF; color: #1a1a1a; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">Email Me</a>
     </section>
 
-    <footer>
-        &copy; 2026 The iGuy | Created on Mac
+    <footer class="site-footer">
+        <p>&copy; 2026 The iGuy</p>
+        <p>This site uses Google Analytics.</p>
     </footer>
 
 </body>

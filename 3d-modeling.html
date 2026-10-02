@@ -12,6 +12,13 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="Interactive 3D models and photos of printed parts.">
+    <meta property="og:title" content="3D Modeling | The iGuy">
+    <meta property="og:description" content="Interactive 3D models and photos of printed parts.">
+    <meta property="og:image" content="https://theiguy.ca/TheiGuy.png">
+    <meta property="og:url" content="https://theiguy.ca/3d-modeling.html">
+    <link rel="stylesheet" href="styles.css">
     <title>3D Modeling | The iGuy</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 
@@ -244,7 +251,15 @@
 <body>
 
 <div class="container">
-    <nav><a href="index.html" class="back-link">← Back to Home</a></nav>
+    <nav class="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="industrial-design.html">Design</a>
+        <a href="3d-modeling.html" aria-current="page">3D</a>
+        <a href="code-snippets.html">Code</a>
+        <a href="hobbies.html">Hobbies</a>
+        <a href="blog.html">Blog</a>
+        <a href="links.html">Links</a>
+    </nav>
 
     <header>
         <h1>3D Modeling Showcase</h1>
@@ -253,7 +268,10 @@
 
     <main class="projects-grid" id="projects-grid"></main>
 
-    <footer>&copy; 2026 The iGuy</footer>
+    <footer class="site-footer">
+        <p>&copy; 2026 The iGuy</p>
+        <p>This site uses Google Analytics.</p>
+    </footer>
 </div>
 
 <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
